@@ -147,7 +147,7 @@ void parseMapGroupData(const char[] mapGroup) {
     BuildPath(Path_SM, cPath, sizeof(cPath), "configs/GroupBasedMapConfig/%s_maps.txt", mapGroup);
 
     if (!FileExists(cPath)) {
-        SetFailState("Map group file not found: %s", cPath);
+        SetFailState("Map list file not found: %s", cPath);
     }
 
     MapData md;
