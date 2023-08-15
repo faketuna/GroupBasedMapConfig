@@ -153,8 +153,12 @@ void parseMapGroupData(const char[] mapGroup) {
     MapData md;
     
     Handle hFile = OpenFile(cPath, "r");
+    char buff[128];
     while(!IsEndOfFile(hFile)) {
-        ReadFileLine(hFile, md.mapName, sizeof(MapData::mapName));
+        //ReadFileLine(hFile, md.mapName, sizeof(MapData::mapName));
+        ReadFileLine(hFile, buff, sizeof(buff));
+        ReplaceString(buff, sizeof(buff), "\n", "");
+        strcopy(md.mapName, sizeof(MapData::mapName), buff);
         strcopy(md.mapGroup, sizeof(MapData::mapGroup), mapGroup);
         g_hMapData.PushArray(md);
     }
