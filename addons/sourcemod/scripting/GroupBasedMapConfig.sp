@@ -55,6 +55,20 @@ public Action commandReloadCfg(int client, int args) {
 }
 
 void onRoundStart(Handle event, const char[] name, bool dontBroadcast) {
+    if (strlen(g_hCurrentMapGroup) < 1) {
+        char buff[128];
+        GetCurrentMap(buff, sizeof(buff));
+        for (int i = 0; i < GetArraySize(g_hMapData); i++) {
+            MapData md;
+            g_hMapData.GetArray(i, md);
+            if (StrEqual(md.mapName, buff)) {
+                strcopy(g_hCurrentMapGroup, sizeof(g_hCurrentMapGroup), md.mapGroup);
+                g_hMapInList = true;
+                break;
+            }
+        }
+    }
+
     if (!g_hMapInList) {
         return;
     }
